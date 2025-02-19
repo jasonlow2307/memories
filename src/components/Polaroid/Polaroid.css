@@ -1,0 +1,61 @@
+/* Container styling */
+.polaroid-container {
+  display: inline-block;
+  cursor: grab;
+  user-select: none;
+  position: relative; /* Needed for overlay positioning */
+  transition: transform 0.3s ease, opacity 0.5s ease;
+  will-change: transform;
+}
+
+.polaroid-container.visible {
+  opacity: 1;
+}
+
+.polaroid-container.hidden {
+  opacity: 0;
+}
+
+/* Invisible drag layer */
+.drag-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  cursor: grab;
+}
+
+.drag-overlay:active {
+  cursor: grabbing;
+}
+
+/* Polaroid card styling */
+.polaroid {
+  position: relative;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 15px;
+  text-align: center;
+  width: 250px;
+  font-family: "Arial", sans-serif;
+  z-index: 1; /* Content below overlay */
+}
+
+/* Image styling */
+.polaroid-image {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  margin-bottom: 30px;
+}
+
+/* Caption styling */
+.polaroid-caption {
+  font-size: 14px;
+  color: #555;
+  margin-top: 5px;
+}

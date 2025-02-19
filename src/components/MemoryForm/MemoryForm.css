@@ -1,0 +1,185 @@
+/* Form container styles */
+.memory-form-container {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full screen height */
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  background: linear-gradient(
+    to right,
+    #ffd700,
+    #ffa500
+  ); /* Gold to Orange gradient background */
+  justify-content: space-between;
+}
+
+/* Form styling */
+form {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; /* Slightly increased gap */
+  background-color: #fff; /* White background for the form */
+  padding: 2rem;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-height: 90vh; /* Ensure the form doesn't take up the full height of the screen */
+  overflow-y: auto; /* Allow scrolling if content exceeds form height */
+  box-sizing: border-box; /* To ensure padding is included in the height calculation */
+}
+
+/* Title Styling */
+.memory-form-title {
+  text-align: center;
+  font-size: 1.7rem;
+  color: #333; /* Dark text color */
+  align-items: center;
+  width: 100%;
+}
+
+.memory-form {
+  overflow: hidden;
+}
+
+/* Input fields styling */
+input[type="text"],
+input[type="datetime-local"],
+select,
+input[type="file"] {
+  padding: 0.75rem; /* Slightly larger padding */
+  margin: 0.45rem 0; /* Slightly larger margin */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem; /* Consistent font size */
+  transition: border-color 0.3s ease;
+  width: 100%; /* Ensure inputs take up the full width */
+}
+
+/* Focus effect for input fields */
+input[type="text"]:focus,
+input[type="datetime-local"]:focus,
+select:focus,
+input[type="file"]:focus {
+  border-color: #007bff; /* Blue border on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Button styles */
+button {
+  padding: 0.75rem 1.5rem; /* Larger padding for button */
+  font-size: 1.1rem; /* Slightly larger font */
+  background-color: #007bff; /* Blue background */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase; /* Uppercase text */
+  font-weight: bold; /* Bold text */
+  width: 100%; /* Make the button take up the full width */
+}
+
+/* Hover effect for button */
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Disabled button */
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Image upload section */
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.file-label {
+  font-size: 1rem;
+  color: #333;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.file-input {
+  display: none; /* Hide the default file input */
+}
+
+.file-upload-container .file-info {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+}
+
+/* Custom file button */
+.file-label {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #28a745; /* Green button */
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  width: 100%;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for custom file button */
+.file-label:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.memory-form-title {
+  text-align: center;
+}
+
+.memory-form-title-section {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  border-radius: 12px;
+  margin-right: 30px;
+  margin: auto;
+}
+
+/* Responsive styling for mobile */
+@media (max-width: 426px) {
+  form {
+    padding: 1.5rem; /* Reduced padding */
+    gap: 1rem; /* Reduced gap between form elements */
+  }
+
+  input[type="text"],
+  input[type="datetime-local"],
+  select,
+  input[type="file"] {
+    font-size: 0.9rem; /* Smaller font size */
+  }
+
+  button {
+    padding: 0.5rem 1.2rem; /* Adjusted padding */
+    font-size: 1rem; /* Slightly smaller font */
+  }
+
+  .form-title {
+    display: none;
+  }
+
+  .memory-form-container {
+    padding-top: 100px;
+  }
+
+  .memory-form-title-section {
+    display: none;
+  }
+}

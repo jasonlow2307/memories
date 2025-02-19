@@ -1,0 +1,168 @@
+export const options = {
+  // Excitement-building pages
+  "🎉": {
+    index: 1,
+    special: true,
+    description: "Something Special Awaits...",
+    gradient: "linear-gradient(to right, #FFC371, #FF5F6D)", // Warm pink-orange gradient
+    text: "#fff",
+  },
+  "🌟": {
+    index: 2,
+    special: true,
+    description: "Are You Ready?",
+    gradient: "linear-gradient(to right, #8E2DE2, #4A00E0)", // Purple gradient
+    text: "#fff",
+  },
+  "✨": {
+    index: 3,
+    special: true,
+    description: "Let's Begin the Journey!",
+    gradient: "linear-gradient(to right, #4CA1AF, #C4E0E5)", // Aqua gradient
+    text: "#fff",
+  },
+  "📅": {
+    index: 4,
+    special: false,
+    date: "2024-02-06T00:00:00",
+    description: "First Meeting",
+    dateDisplay: "6th February 2024",
+    gradient: "linear-gradient(to right, #FFD194, #D1913C)",
+    text: "#fff",
+  },
+  "🏆": {
+    index: 5,
+    special: false,
+    date: "2024-09-16T00:00:00",
+    description: "First Competition",
+    dateDisplay: "16th September 2024",
+    gradient: "linear-gradient(to right, #FFD700, #FFA500)",
+    text: "#fff",
+  },
+  "👥": {
+    index: 6,
+    special: false,
+    date: "2024-09-23T00:00:00",
+    description: "First Group Outing",
+    dateDisplay: "23rd September 2024",
+    gradient: "linear-gradient(to right, #84FAB0, #8FD3F4)",
+    text: "#555",
+  },
+  "🏖️": {
+    index: 7,
+    special: false,
+    date: "2024-10-19T00:00:00",
+    description: "First Trip",
+    dateDisplay: "19th October 2024",
+    gradient: "linear-gradient(to right, #FF9A8B, #FF6A88, #FF99AC)",
+    text: "#fff",
+  },
+  "🎤": {
+    index: 8,
+    special: false,
+    date: "2024-11-27T00:00:00",
+    description: "First Karaoke Date",
+    dateDisplay: "27th November 2024",
+    gradient: "linear-gradient(to right, #8E2DE2, #4A00E0)",
+    text: "#fff",
+  },
+  "⚾": {
+    index: 9,
+    special: false,
+    date: "2024-12-02T00:00:00",
+    description: "First Baseball/Walk Home",
+    dateDisplay: "2nd December 2024",
+    gradient: "linear-gradient(to right, #FDC830, #F37335)",
+    text: "#fff",
+  },
+  "🐶": {
+    index: 10,
+    special: false,
+    date: "2024-12-11T00:00:00",
+    description: "First Actual Date (Pets Cafe)",
+    dateDisplay: "11th December 2024",
+    gradient: "linear-gradient(to right, #56CCF2, #2F80ED)",
+    text: "#fff",
+  },
+  "🏊": {
+    index: 11,
+    special: false,
+    date: "2024-12-28T00:00:00",
+    description: "Pool /Buying Clothes",
+    dateDisplay: "28th December 2024",
+    gradient: "linear-gradient(to right, #2BC0E4, #EAECC6)",
+    text: "#555",
+  },
+  "🤝": {
+    index: 12,
+    special: false,
+    date: "2024-12-31T00:00:00",
+    description: "First Holding Hands",
+    dateDisplay: "31st December 2024",
+    gradient: "linear-gradient(to right, #A1FFCE, #FAFFD1)",
+    text: "#555",
+  },
+  "🤗": {
+    index: 13,
+    special: false,
+    date: "2025-01-01T00:00:00",
+    description: "First Hug",
+    dateDisplay: "1st January 2025",
+    gradient: "linear-gradient(to right, #FFDEE9, #B5FFFC)",
+    text: "#555",
+  },
+  "😚": {
+    index: 14,
+    special: false,
+    date: "2025-01-07T00:00:00",
+    description: "First Kiss",
+    dateDisplay: "7th January 2025",
+    gradient: "linear-gradient(to right, #FCE38A, #F38181)",
+    text: "#fff",
+  },
+  "❤️": {
+    index: 15,
+    special: false,
+    date: "2025-01-08T00:00:00",
+    description: "Getting Together",
+    dateDisplay: "8th January 2025",
+    gradient: "linear-gradient(to right, #FF416C, #FF4B2B)",
+    text: "#fff",
+  },
+  "🌈": {
+    index: 16,
+    special: true,
+    description: "This is just the beginning...",
+    gradient: "linear-gradient(to right, #74EBD5, #9FACE6)", // Soft teal-purple gradient
+    text: "#fff",
+  },
+  "💖": {
+    index: 17,
+    special: true,
+    description: "Excited for many more chapters to come!",
+    gradient: "linear-gradient(to right, #FF9A9E, #FAD0C4)", // Warm pink gradient
+    text: "#fff",
+  },
+  "🚀": {
+    index: 18,
+    special: true,
+    description: "Let's make more special memories together!",
+    gradient: "linear-gradient(to right, #FF758C, #FF7EB3)", // Pink and purple gradient
+    text: "#fff",
+  },
+  "🎂": {
+    index: 19,
+    special: true,
+    description: "Happy Birthday!",
+    gradient: "linear-gradient(to right, #FF758C, #FF7EB3)", // Pink and purple gradient
+    text: "#fff",
+  },
+};
+
+export const wrongMessages = [
+  "Oops! Try again! 😅",
+  "Haha, close but not quite! 😂",
+  "That's not it! Take a guess again! 🤔",
+  "No worries, you're still amazing! 💕",
+  "Aww, that was tricky! Want to try again? 🧐",
+];
