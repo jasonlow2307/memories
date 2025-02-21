@@ -20,6 +20,7 @@ const Nav = ({ page, setPage }) => {
         variant: "success",
         autoHideDuration: 2000,
       });
+      setPage("login");
     } catch (error) {
       console.error("Logout error:", error);
       enqueueSnackbar("Logout failed", {

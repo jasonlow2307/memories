@@ -33,6 +33,11 @@ const LoginPage = ({ setUser, setPage, switchToRegister }) => {
         variant: "success",
         autoHideDuration: 2000,
       });
+
+      writeData("login", {
+        email: userCredential.user.email,
+        date: new Date(),
+      });
     } catch (error) {
       console.error("❌ Login error:", error.code, error.message);
 
@@ -57,6 +62,16 @@ const LoginPage = ({ setUser, setPage, switchToRegister }) => {
         autoHideDuration: 3000,
       });
     }
+  };
+
+  const handleGuestLogin = () => {
+    setUser({ uid: "default" });
+    setPage("memories");
+    localStorage.setItem("user", "guest");
+    enqueueSnackbar("Continuing as guest", {
+      variant: "info",
+      autoHideDuration: 2000,
+    });
   };
 
   return (
@@ -88,6 +103,11 @@ const LoginPage = ({ setUser, setPage, switchToRegister }) => {
             Don't have an account?{" "}
             <span onClick={switchToRegister} className="switch-link">
               Register here
+            </span>
+          </p>
+          <p className="switch-auth">
+            <span onClick={handleGuestLogin} className="switch-link">
+              Continue as guest
             </span>
           </p>
         </form>

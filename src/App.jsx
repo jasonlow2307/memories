@@ -31,7 +31,11 @@ const App = () => {
 
   if (!user) {
     return isLogin ? (
-      <LoginPage setUser={setUser} switchToRegister={() => setIsLogin(false)} />
+      <LoginPage
+        setUser={setUser}
+        setPage={setPage}
+        switchToRegister={() => setIsLogin(false)}
+      />
     ) : (
       <RegisterPage setUser={setUser} switchToLogin={() => setIsLogin(true)} />
     );
@@ -44,6 +48,12 @@ const App = () => {
           <Memory setPage={setPage} user={user} />
         ) : page === "form" ? (
           <MemoryForm user={user} />
+        ) : page === "login" ? (
+          <LoginPage
+            setPage={setPage}
+            setUser={setUser}
+            switchToRegister={() => setIsLogin(false)}
+          />
         ) : page === "memory-grid" ? (
           <MemoryGrid user={user} setPage={setPage} />
         ) : null}

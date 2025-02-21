@@ -120,6 +120,10 @@
   color: #0056b3;
 }
 
+form {
+  margin: auto;
+}
+
 /* Responsive styling */
 @media (max-width: 768px) {
   .form-section,

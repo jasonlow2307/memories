@@ -102,7 +102,12 @@ const Memory = ({ setPage, user }) => {
     }
 
     // If no cache or cache expired, load from Firebase
-    const folderRef = ref(storage, `${user.uid}/${folderIndex}`);
+    let folderRef;
+    if (user.uid === "default") {
+      folderRef = ref(storage, `${folderIndex}`);
+    } else {
+      folderRef = ref(storage, `${user.uid}/${folderIndex}`);
+    }
     console.log("FOLDER", folderRef);
 
     try {
