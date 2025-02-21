@@ -81,8 +81,8 @@ const Memory = ({ setPage, user }) => {
     const cachedData = localStorage.getItem(`images-${folderIndex}`);
     if (cachedData) {
       const { urls, timestamp } = JSON.parse(cachedData);
-      // Check if cache is less than 24 hours old
-      if (Date.now() - timestamp < 24 * 60 * 60 * 1000) {
+      // Check if cache is less than 3 minutes old
+      if (Date.now() - timestamp < 3 * 60 * 1000) {
         console.log(
           "🎯 Cache hit! Using cached images for folder",
           folderIndex

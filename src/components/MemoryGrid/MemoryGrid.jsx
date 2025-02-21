@@ -6,7 +6,7 @@ import { firestore_collection_name } from "../../firebase/firebase";
 import "./MemoryGrid.css";
 import maximizeIcon from "../../assets/maximize.png";
 
-const MemoryGrid = () => {
+const MemoryGrid = ({ user }) => {
   const [memories, setMemories] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const memoriesPerPage = 4;
@@ -24,7 +24,9 @@ const MemoryGrid = () => {
       const querySnapshot = await getDocs(
         collection(db, firestore_collection_name)
       );
-      const fetchedMemories = querySnapshot.docs.map((doc) => doc.data());
+      const fetchedMemories = querySnapshot.docs
+        .map((doc) => doc.data())
+        .filter((doc) => doc.userId === user.uid);
       const sortedMemories = fetchedMemories.sort((a, b) => a.index - b.index);
 
       const filteredMemories = sortedMemories.filter(

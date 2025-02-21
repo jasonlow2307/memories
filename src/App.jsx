@@ -45,7 +45,7 @@ const App = () => {
         ) : page === "form" ? (
           <MemoryForm user={user} />
         ) : page === "memory-grid" ? (
-          <MemoryGrid />
+          <MemoryGrid user={user} />
         ) : null}
         ;{/* <MemoryForm/> */}
       </Box>
