@@ -11,22 +11,14 @@ import { ref, listAll, getDownloadURL } from "firebase/storage";
 import "./Memory.css";
 import "../../App.css";
 
-const Memory = ({ setPage }) => {
+const Memory = ({ setPage, user }) => {
   const [memories, setMemories] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0); // Current page index
   const [images, setImages] = useState([]); // Images for the current page
   const [isAnimating, setIsAnimating] = useState(false); // Track if an animation is in progress
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  const [cachedImages, setCachedImages] = useState({});
 
   useEffect(() => {
-    const oldIndex = localStorage.getItem("index");
-
-    console.log(oldIndex);
-    if (oldIndex) {
-      setCurrentIndex(Number(oldIndex));
-    }
-
     const handleResize = () => {
       setIsMobile(window.innerWidth < 1024);
     };
@@ -38,12 +30,11 @@ const Memory = ({ setPage }) => {
       const querySnapshot = await getDocs(
         collection(db, firestore_collection_name)
       );
-      const fetchedMemories = querySnapshot.docs.map((doc) => doc.data());
-      console.log("FETCHED MEMORIES", fetchedMemories);
-      // Sort memories based on the index field
-      const sortedMemories = fetchedMemories.sort((a, b) => a.index - b.index);
+      const fetchedMemories = querySnapshot.docs
+        .map((doc) => doc.data())
+        .filter((memory) => memory.userId === user.uid); // Filter by user ID
 
-      // Set the sorted memories
+      const sortedMemories = fetchedMemories.sort((a, b) => a.index - b.index);
       setMemories(sortedMemories);
     };
 
@@ -111,7 +102,7 @@ const Memory = ({ setPage }) => {
     }
 
     // If no cache or cache expired, load from Firebase
-    const folderRef = ref(storage, `${folderIndex}`);
+    const folderRef = ref(storage, `${user.uid}/${folderIndex}`);
     console.log("FOLDER", folderRef);
 
     try {

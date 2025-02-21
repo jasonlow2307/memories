@@ -1,0 +1,15 @@
+.switch-auth {
+  margin-top: 1rem;
+  text-align: center;
+  color: #666;
+}
+
+.switch-link {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.switch-link:hover {
+  color: #0056b3;
+}

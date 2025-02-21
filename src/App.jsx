@@ -7,25 +7,43 @@ import Nav from "./components/Nav/Nav";
 import { SnackbarProvider } from "notistack";
 import MemoryGrid from "./components/MemoryGrid/MemoryGrid";
 import React from "react";
+import LoginPage from "./components/LoginPage/LoginPage";
+import { auth } from "./firebase/firebase";
+import RegisterPage from "./components/RegisterPage/RegisterPage";
 
 const App = () => {
   const [page, setPage] = useState("form");
+  const [user, setUser] = useState(null);
+  const [isLogin, setIsLogin] = useState(true);
 
   useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
     const storedPage = localStorage.getItem("page");
     if (storedPage) {
       setPage(storedPage);
     }
+
+    return () => unsubscribe();
   }, []);
 
+  if (!user) {
+    return isLogin ? (
+      <LoginPage onLogin={setUser} switchToRegister={() => setIsLogin(false)} />
+    ) : (
+      <RegisterPage setUser={setUser} switchToLogin={() => setIsLogin(true)} />
+    );
+  }
   return (
     <SnackbarProvider maxSnack={3} autoHideDuration={2500}>
       <Nav setPage={setPage} page={page} />
       <Box>
         {page === "memories" ? (
-          <Memory setPage={setPage} />
+          <Memory setPage={setPage} user={user} />
         ) : page === "form" ? (
-          <MemoryForm />
+          <MemoryForm user={user} />
         ) : page === "memory-grid" ? (
           <MemoryGrid />
         ) : null}

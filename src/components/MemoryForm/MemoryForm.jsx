@@ -35,7 +35,7 @@ const formatDateForDisplay = (dateString) => {
   return `${dayFormatted} ${month} ${year}`;
 };
 
-const MemoryForm = () => {
+const MemoryForm = ({ user }) => {
   // State for form data
   const [formData, setFormData] = useState({
     date: "",
@@ -81,6 +81,7 @@ const MemoryForm = () => {
 
       querySnapshot.forEach((doc) => {
         const docData = doc.data();
+        if (docData.userId !== user.uid) return;
         fetchedData.push({ id: doc.id, ...docData });
       });
 
@@ -94,7 +95,7 @@ const MemoryForm = () => {
         const uploadPromises = images.map((image, index) => {
           const storageRef = ref(
             storage,
-            `${fetchedData.length}/${index}_${image.name}`
+            `${user.uid}/${fetchedData.length}/${index}_${image.name}`
           );
           return uploadBytes(storageRef, image)
             .then(() => getDownloadURL(storageRef))
@@ -116,6 +117,7 @@ const MemoryForm = () => {
         gradient: gradientPalette[gradientIndex],
         text: textPalette[gradientIndex],
         index: fetchedData.length,
+        userId: user.uid,
       });
 
       alert("Memory added successfully!");
