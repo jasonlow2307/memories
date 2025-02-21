@@ -1,13 +1,32 @@
 import React, { useState } from "react";
 import "./Nav.css";
 import { useSnackbar } from "notistack";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
 
 const Nav = ({ page, setPage }) => {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar(); // Access enqueueSnackbar and closeSnackbar
+  const { enqueueSnackbar } = useSnackbar(); // Access enqueueSnackbar and closeSnackbar
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen((prevState) => !prevState);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      localStorage.clear(); // Clear all local storage
+      enqueueSnackbar("Logged out successfully!", {
+        variant: "success",
+        autoHideDuration: 2000,
+      });
+    } catch (error) {
+      console.error("Logout error:", error);
+      enqueueSnackbar("Logout failed", {
+        variant: "error",
+        autoHideDuration: 2000,
+      });
+    }
   };
 
   return (
@@ -74,6 +93,17 @@ const Nav = ({ page, setPage }) => {
               className={page === "form" ? "selected" : ""}
             >
               ✍️ Submit Memories
+            </a>
+          </li>
+          <li className="logout-item">
+            <a
+              onClick={() => {
+                handleLogout();
+                toggleMenu();
+              }}
+              className="logout-button"
+            >
+              🚪 Logout
             </a>
           </li>
         </ul>

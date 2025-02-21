@@ -104,6 +104,28 @@
   cursor: pointer;
 }
 
+.logout-item {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 30px;
+}
+
+.logout-button {
+  color: #ff6b6b !important;
+  transition: color 0.3s ease !important;
+}
+
+.logout-button:hover {
+  color: #ff4444 !important;
+}
+
+.nav-menu ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem 0;
+}
+
 /* Media Query for Mobile */
 @media (max-width: 768px) {
   .nav-menu a {

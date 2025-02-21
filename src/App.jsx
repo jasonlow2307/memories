@@ -38,7 +38,7 @@ const App = () => {
   }
   return (
     <SnackbarProvider maxSnack={3} autoHideDuration={2500}>
-      <Nav setPage={setPage} page={page} />
+      <Nav setPage={setPage} page={page} user={user} />
       <Box>
         {page === "memories" ? (
           <Memory setPage={setPage} user={user} />

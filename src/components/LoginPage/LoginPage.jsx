@@ -9,7 +9,7 @@ const LoginPage = ({ setUser, setPage, switchToRegister }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); // Add error state
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const { writeData } = useFirestoreWrite();
 
   const handleSubmit = async (e) => {
@@ -24,7 +24,7 @@ const LoginPage = ({ setUser, setPage, switchToRegister }) => {
         email,
         password
       );
-      console.log("✅ Login successful:", userCredential.user);
+      // console.log("✅ Login successful:", userCredential.user);
 
       setUser(userCredential.user);
       localStorage.setItem("user", JSON.stringify(userCredential.user.email));
