@@ -6,7 +6,7 @@ import { firestore_collection_name } from "../../firebase/firebase";
 import "./MemoryGrid.css";
 import maximizeIcon from "../../assets/maximize.png";
 
-const MemoryGrid = ({ user }) => {
+const MemoryGrid = ({ user, setPage }) => {
   const [memories, setMemories] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const memoriesPerPage = 4;
@@ -70,74 +70,95 @@ const MemoryGrid = ({ user }) => {
 
   return (
     <div className="grid-wrapper">
-      {/* Wrap the grid with CSSTransition to animate page change */}
-      <div
-        className="memory-grid"
-        style={{
-          gridTemplateColumns: isMobile
-            ? "1fr"
-            : displayedMemories.length > 2
-            ? "repeat(2, 1fr)"
-            : "auto",
-        }}
-      >
-        {displayedMemories.map((memory, index) => (
-          <div
-            className={`memory-card ${
-              maximizedMemory === index ? "maximized" : ""
-            }`}
-            key={index}
-            style={{
-              backgroundImage: memory.gradient,
-              color: memory.text,
-              fontFamily: "'Poppins', sans-serif",
+      {memories.length === 0 ? (
+        <div className="no-memories">
+          <h2>No memories found 😢</h2>
+          <p>Start by creating your first memory!</p>
+          <button
+            className="add-memory-button"
+            onClick={() => {
+              setPage("form");
+              localStorage.setItem("page", "form");
             }}
           >
-            {/* Maximize button */}
-            <button
-              className="maximize-button"
-              onClick={() => toggleMaximize(index)}
-            >
-              <img
-                src={maximizeIcon}
+            Add Memory ✨
+          </button>
+        </div>
+      ) : (
+        <>
+          {" "}
+          {/* Wrap the grid with CSSTransition to animate page change */}
+          <div
+            className="memory-grid"
+            style={{
+              gridTemplateColumns: isMobile
+                ? "1fr"
+                : displayedMemories.length > 2
+                ? "repeat(2, 1fr)"
+                : "auto",
+            }}
+          >
+            {displayedMemories.map((memory, index) => (
+              <div
+                className={`memory-card ${
+                  maximizedMemory === index ? "maximized" : ""
+                }`}
+                key={index}
                 style={{
-                  width: "30px",
+                  backgroundImage: memory.gradient,
+                  color: memory.text,
+                  fontFamily: "'Poppins', sans-serif",
                 }}
-              />
-            </button>
-            <h1 className="title">
-              {memory.emoji} {memory.description}
-            </h1>
-            {memory.dateDisplay && (
-              <h2 className="date">{memory.dateDisplay}</h2>
+              >
+                {/* Maximize button */}
+                <button
+                  className="maximize-button"
+                  onClick={() => toggleMaximize(index)}
+                >
+                  <img
+                    src={maximizeIcon}
+                    style={{
+                      width: "30px",
+                    }}
+                  />
+                </button>
+                <h1 className="title">
+                  {memory.emoji} {memory.description}
+                </h1>
+                {memory.dateDisplay && (
+                  <h2 className="date">{memory.dateDisplay}</h2>
+                )}
+                {memory.date && (
+                  <FlipCountdown targetDate={memory.date} sizeOption="grid" />
+                )}
+              </div>
+            ))}
+          </div>
+          {/* Pagination Controls */}
+          <div className="pagination-controls">
+            {currentPage != 0 && (
+              <button
+                className="pagination-button"
+                onClick={handlePreviousPage}
+                disabled={currentPage === 0}
+              >
+                ← Previous
+              </button>
             )}
-            {memory.date && (
-              <FlipCountdown targetDate={memory.date} sizeOption="grid" />
+            {(currentPage + 1) * memoriesPerPage < memories.length && (
+              <button
+                className="pagination-button"
+                onClick={handleNextPage}
+                disabled={
+                  (currentPage + 1) * memoriesPerPage >= memories.length
+                }
+              >
+                Next →
+              </button>
             )}
           </div>
-        ))}
-      </div>
-      {/* Pagination Controls */}
-      <div className="pagination-controls">
-        {currentPage != 0 && (
-          <button
-            className="pagination-button"
-            onClick={handlePreviousPage}
-            disabled={currentPage === 0}
-          >
-            ← Previous
-          </button>
-        )}
-        {(currentPage + 1) * memoriesPerPage < memories.length && (
-          <button
-            className="pagination-button"
-            onClick={handleNextPage}
-            disabled={(currentPage + 1) * memoriesPerPage >= memories.length}
-          >
-            Next →
-          </button>
-        )}
-      </div>
+        </>
+      )}
     </div>
   );
 };

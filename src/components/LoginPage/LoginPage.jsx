@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./LoginPage.css";
 import { useSnackbar } from "notistack";
 import useFirestoreWrite from "../../firebase/useFirestoreWrite";
-import { loginUser } from "../../firebase/auth"; // Import the loginUser function
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase";
 
 const LoginPage = ({ setUser, setPage, switchToRegister }) => {
   const [email, setEmail] = useState("");
@@ -13,70 +14,47 @@ const LoginPage = ({ setUser, setPage, switchToRegister }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear any existing errors
+    setError("");
+
+    console.log("🔐 Attempting login with:", { email });
 
     try {
-      // Attempt to login with Firebase
-      const userCredential = await loginUser(email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log("✅ Login successful:", userCredential.user);
 
-      // If successful, update the app state
-      setUser(userCredential);
-      localStorage.setItem("user", JSON.stringify(userCredential.email));
+      setUser(userCredential.user);
+      localStorage.setItem("user", JSON.stringify(userCredential.user.email));
 
-      enqueueSnackbar("Logged In Successfully!", {
+      enqueueSnackbar("Login successful!", {
         variant: "success",
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-        autoHideDuration: 3000,
-        className: "custom-snackbar",
-        action: (key) => (
-          <button
-            onClick={() => closeSnackbar(key)}
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#fff",
-              cursor: "pointer",
-              fontWeight: "bold",
-            }}
-          >
-            Dismiss
-          </button>
-        ),
+        autoHideDuration: 2000,
       });
-
-      setPage("memories"); // Navigate to memories page instead of quiz
-      localStorage.setItem("page", "memories");
-
-      // Record login in Firestore
-      const record = {
-        time: new Date(new Date().getTime() + 8 * 60 * 60 * 1000).toISOString(),
-        user: userCredential.email,
-        uid: userCredential.uid,
-      };
-      await writeData("login", record);
     } catch (error) {
-      // Handle specific Firebase auth errors
-      let errorMessage = "Login failed. Please try again.";
+      console.error("❌ Login error:", error.code, error.message);
 
+      let errorMessage = "Login failed";
       switch (error.code) {
+        case "auth/invalid-email":
+          errorMessage = "Invalid email address";
+          break;
         case "auth/user-not-found":
-          errorMessage = "No account found with this email.";
+          errorMessage = "No account found with this email";
           break;
         case "auth/wrong-password":
-          errorMessage = "Incorrect password.";
+          errorMessage = "Incorrect password";
           break;
-        case "auth/invalid-email":
-          errorMessage = "Invalid email address.";
-          break;
-        case "auth/too-many-requests":
-          errorMessage = "Too many failed attempts. Please try again later.";
-          break;
+        default:
+          errorMessage = error.message;
       }
 
       setError(errorMessage);
       enqueueSnackbar(errorMessage, {
         variant: "error",
-        anchorOrigin: { vertical: "top", horizontal: "center" },
+        autoHideDuration: 3000,
       });
     }
   };

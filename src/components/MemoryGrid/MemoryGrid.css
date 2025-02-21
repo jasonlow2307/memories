@@ -170,6 +170,48 @@ body {
   cursor: not-allowed;
 }
 
+.no-memories {
+  text-align: center;
+  padding: 2rem;
+  margin: 2rem auto;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.no-memories h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.no-memories p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.add-memory-button {
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+}
+
+.add-memory-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+}
+
+.add-memory-button:active {
+  transform: translateY(0);
+}
+
 @media (max-width: 768px) {
   .memory-grid {
     grid-template-columns: repeat(2, 1fr);

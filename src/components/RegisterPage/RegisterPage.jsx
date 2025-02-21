@@ -15,36 +15,62 @@ const RegisterPage = ({ setUser, switchToLogin }) => {
     e.preventDefault();
     setError("");
 
+    console.log("📝 Starting registration process");
+
     if (password !== confirmPassword) {
       setError("Passwords do not match");
+      enqueueSnackbar("Passwords do not match", { variant: "error" });
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Password should be at least 6 characters");
+      enqueueSnackbar("Password should be at least 6 characters", {
+        variant: "error",
+      });
       return;
     }
 
     try {
+      console.log("🔐 Creating account with:", { email });
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-      setUser(userCredential.user);
-      enqueueSnackbar("Registration successful!", { variant: "success" });
-    } catch (error) {
-      let errorMessage = "Registration failed. Please try again.";
+      console.log("✅ Registration successful:", userCredential.user);
 
+      setUser(userCredential.user);
+      localStorage.setItem("user", JSON.stringify(userCredential.user.email));
+      switchToLogin();
+
+      enqueueSnackbar("Registration successful!", {
+        variant: "success",
+        autoHideDuration: 2000,
+      });
+    } catch (error) {
+      console.error("❌ Registration error:", error.code, error.message);
+
+      let errorMessage = "Registration failed";
       switch (error.code) {
         case "auth/email-already-in-use":
-          errorMessage = "This email is already registered.";
-          break;
-        case "auth/weak-password":
-          errorMessage = "Password should be at least 6 characters.";
+          errorMessage = "This email is already registered";
           break;
         case "auth/invalid-email":
-          errorMessage = "Invalid email address.";
+          errorMessage = "Invalid email address";
           break;
+        case "auth/weak-password":
+          errorMessage = "Password is too weak";
+          break;
+        default:
+          errorMessage = error.message;
       }
 
       setError(errorMessage);
-      enqueueSnackbar(errorMessage, { variant: "error" });
+      enqueueSnackbar(errorMessage, {
+        variant: "error",
+        autoHideDuration: 3000,
+      });
     }
   };
 
