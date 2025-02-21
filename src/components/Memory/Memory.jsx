@@ -251,7 +251,9 @@ const Memory = ({ setPage, user }) => {
             alignContent: "center",
           }}
         >
-          <h1 style={{ marginBottom: 50 }}>No memories yet...</h1>
+          <h1 style={{ marginBottom: 50, textAlign: "center" }}>
+            No memories yet...
+          </h1>
           <button onClick={() => setPage("form")} style={{ width: 300 }}>
             Add one now!
           </button>

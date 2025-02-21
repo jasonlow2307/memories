@@ -152,6 +152,42 @@ button:disabled {
   margin: auto;
 }
 
+.guest-message {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+.guest-message h2 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.guest-message p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.login-redirect-button {
+  background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.login-redirect-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.2);
+}
+
 /* Responsive styling for mobile */
 @media (max-width: 426px) {
   form {

@@ -47,7 +47,7 @@ const App = () => {
         {page === "memories" ? (
           <Memory setPage={setPage} user={user} />
         ) : page === "form" ? (
-          <MemoryForm user={user} />
+          <MemoryForm user={user} setPage={setPage} />
         ) : page === "login" ? (
           <LoginPage
             setPage={setPage}
@@ -57,7 +57,7 @@ const App = () => {
         ) : page === "memory-grid" ? (
           <MemoryGrid user={user} setPage={setPage} />
         ) : null}
-        ;{/* <MemoryForm/> */}
+        ;
       </Box>
     </SnackbarProvider>
   );

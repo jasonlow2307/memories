@@ -35,7 +35,7 @@ const formatDateForDisplay = (dateString) => {
   return `${dayFormatted} ${month} ${year}`;
 };
 
-const MemoryForm = ({ user }) => {
+const MemoryForm = ({ user, setPage }) => {
   // State for form data
   const [formData, setFormData] = useState({
     date: "",
@@ -136,6 +136,26 @@ const MemoryForm = ({ user }) => {
       setIsLoading(false); // Set loading to false when finished
     }
   };
+
+  if (user.uid === "default") {
+    return (
+      <div className="memory-form-container">
+        <div className="guest-message">
+          <h2>👋 Hey there, Guest!</h2>
+          <p>Login to create and save your own memories.</p>
+          <button
+            className="login-redirect-button"
+            onClick={() => {
+              setPage("login");
+              localStorage.setItem("page", "login");
+            }}
+          >
+            Login Now
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="memory-form-container">

@@ -38,6 +38,7 @@ const LoginPage = ({ setUser, setPage, switchToRegister }) => {
         email: userCredential.user.email,
         date: new Date(),
       });
+      setPage("memories");
     } catch (error) {
       console.error("❌ Login error:", error.code, error.message);
 

@@ -220,6 +220,10 @@ body {
   .memory-card {
     height: 200px;
   }
+
+  .grid-wrapper {
+    padding-top: 370px;
+  }
 }
 
 @media (max-width: 480px) {
