@@ -16,6 +16,12 @@ const LoginPage = ({ setUser, setPage, switchToRegister }) => {
     e.preventDefault();
     setError("");
 
+    Object.keys(localStorage).forEach((key) => {
+      if (key.startsWith("images-")) {
+        localStorage.removeItem(key);
+      }
+      console.log("🔑 Cleared image cache");
+    });
     console.log("🔐 Attempting login with:", { email });
 
     try {
