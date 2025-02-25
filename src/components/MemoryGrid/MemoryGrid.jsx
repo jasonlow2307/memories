@@ -26,7 +26,7 @@ const MemoryGrid = ({ user, setPage }) => {
       );
       const fetchedMemories = querySnapshot.docs
         .map((doc) => doc.data())
-        .filter((doc) => doc.userId === user.uid);
+        .filter((doc) => doc.email === user.email);
       const sortedMemories = fetchedMemories.sort((a, b) => a.index - b.index);
 
       const filteredMemories = sortedMemories.filter(

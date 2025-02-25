@@ -30,7 +30,7 @@ const LoginPage = ({ setUser, setPage, switchToRegister }) => {
         email,
         password
       );
-      // console.log("✅ Login successful:", userCredential.user);
+      console.log("✅ Login successful:", userCredential.user);
 
       setUser(userCredential.user);
       localStorage.setItem("user", JSON.stringify(userCredential.user.email));

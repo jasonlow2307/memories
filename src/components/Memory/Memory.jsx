@@ -32,7 +32,7 @@ const Memory = ({ setPage, user }) => {
       );
       const fetchedMemories = querySnapshot.docs
         .map((doc) => doc.data())
-        .filter((memory) => memory.userId === user.uid); // Filter by user ID
+        .filter((memory) => memory.email === user.email); // Filter by user ID
 
       const sortedMemories = fetchedMemories.sort((a, b) => a.index - b.index);
       setMemories(sortedMemories);
@@ -106,7 +106,7 @@ const Memory = ({ setPage, user }) => {
     if (user.uid === "default") {
       folderRef = ref(storage, `${folderIndex}`);
     } else {
-      folderRef = ref(storage, `${user.uid}/${folderIndex}`);
+      folderRef = ref(storage, `${user.email}/${folderIndex}`);
     }
     console.log("FOLDER", folderRef);
 

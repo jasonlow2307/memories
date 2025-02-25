@@ -81,7 +81,7 @@ const MemoryForm = ({ user, setPage }) => {
 
       querySnapshot.forEach((doc) => {
         const docData = doc.data();
-        if (docData.userId !== user.uid) return;
+        if (docData.email !== user.email) return;
         fetchedData.push({ id: doc.id, ...docData });
       });
 
@@ -95,7 +95,7 @@ const MemoryForm = ({ user, setPage }) => {
         const uploadPromises = images.map((image, index) => {
           const storageRef = ref(
             storage,
-            `${user.uid}/${fetchedData.length}/${index}_${image.name}`
+            `${user.email}/${fetchedData.length}/${index}_${image.name}`
           );
           return uploadBytes(storageRef, image)
             .then(() => getDownloadURL(storageRef))
@@ -117,7 +117,7 @@ const MemoryForm = ({ user, setPage }) => {
         gradient: gradientPalette[gradientIndex],
         text: textPalette[gradientIndex],
         index: fetchedData.length,
-        userId: user.uid,
+        email: user.email,
       });
 
       alert("Memory added successfully!");
